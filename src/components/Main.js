@@ -99,6 +99,7 @@ class ControllerUnit extends React.Component {
     } else {
       this.props.center();
     }
+    //阻止浏览器默认事件
     e.stopPropagation();
     e.preventDefault();
   }
@@ -119,7 +120,7 @@ class ControllerUnit extends React.Component {
   }
 }
 
-
+//主要管理组件
 class GalleryByReactApp extends React.Component {
   constructor(props) {
     super(props);
@@ -141,15 +142,15 @@ class GalleryByReactApp extends React.Component {
 
     this.state = {
       imgsArrangeArr: [
-        //{
-        //  pos:{
-        //    left:'0',
-        //    top:'0'
-        //  },
-        //    rotate:0, //旋转角度
-        //isInverse:false //正反面
-        //isCenter:false 图片是否居中
-        //}
+        {
+         pos:{
+           left:'0',
+           top:'0'
+         },
+           rotate:0, //旋转角度
+        isInverse:false, //正反面
+        isCenter:false //图片是否居中
+        }
       ]
     };
   }
@@ -165,7 +166,7 @@ class GalleryByReactApp extends React.Component {
     }
   }
 
-  //重新布局所有图片
+  //重新布局所有图片,centerIndex制定居中图片的索引
   rearrange(centerIndex) {
     let imgsArrangeArr = this.state.imgsArrangeArr,
       Constant = this.Constant,
@@ -240,9 +241,11 @@ class GalleryByReactApp extends React.Component {
       this.rearrange(index);
     }
   }
-
+//组件加载后为每张图片计算范围
   componentDidMount() {
+    //拿到舞台大小
     let stageDOM = ReactDOM.findDOMNode(this.refs.stage),
+      //dom元素宽高
       stageW = stageDOM.scrollWidth,
       stageH = stageDOM.scrollHeight,
 
@@ -250,7 +253,6 @@ class GalleryByReactApp extends React.Component {
       halfStageH = Math.ceil(stageH / 2);
 
     //拿到一个imgFigure的大小
-
     let imgFigureDOM = ReactDOM.findDOMNode(this.refs.imgFigure0),
       imgW = imgFigureDOM.scrollWidth,
       imgH = imgFigureDOM.scrollHeight,
@@ -262,7 +264,7 @@ class GalleryByReactApp extends React.Component {
         left: halfStageW - halfImgW,
         top: halfStageH - halfImgH
       }
-      //计算左侧,右侧区域图片排布的取值范围
+    //计算左侧,右侧区域图片排布的取值范围
     this.Constant.hPosRange.leftSecX[0] = -halfImgW;
     this.Constant.hPosRange.leftSecX[1] = halfStageW - halfImgW * 3;
 
