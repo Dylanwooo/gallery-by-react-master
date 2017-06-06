@@ -1,8 +1,8 @@
 # gallery-by-react
-one photo gallery project based on react
+a photo gallery project based on react
 
-#根据慕课网 “React实战-打造画廊应用” 课程完成
-
+## 项目演示：
+## https://dylanwooo.github.io/gallery-by-react-master/dist/index.html
 
 
 
